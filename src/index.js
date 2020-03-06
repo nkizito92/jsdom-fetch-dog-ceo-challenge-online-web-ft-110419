@@ -17,6 +17,7 @@ function renderImages(json) {
   }); 
 }
 
+
  function fetchBreed() {
    return fetch(breedUrl)
    .then(res => res.json())
@@ -26,20 +27,20 @@ function renderImages(json) {
 function renderBreeds(json) {
   const breeds = document.querySelector("#dog-breeds");
    for(let char in json.message ){
+    let li = document.createElement("li");
+      li.id ="dog";
          if(json.message[char] != ""){
-        
-              breeds.innerHTML +=`<li id="dog">There are ${char}: ${json.message[char].join(", ")}</li> <br>`;
-        const clickDog = document.querySelector("#dog");
-            clickDog.addEventListener("click", colorChange);
+             li.innerText = `There are ${char}: ${json.message[char].join(", ")} \n\n`
+             breeds.appendChild(li)
+             li.addEventListener("click", colorChange);
          } else {
             breeds.innerHTML +=`<li>There is no breed for ${char} Dogs </li>`;
           }
          } 
       
 }
-
-function colorChange () {
-  this.style.color = "green"
+function colorChange (e) {
+  e.target.style.color = "green"
 }
 
 document.addEventListener('DOMContentLoaded', function() {
